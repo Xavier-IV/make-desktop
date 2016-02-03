@@ -347,6 +347,8 @@ public class MakeDesktop extends Application {
     }
     
     public void saveResult() throws IOException{
+        
+        //Saving the output to Desktop file
         BufferedWriter saveFile = null;
         try
         {       	
