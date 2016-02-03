@@ -59,6 +59,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.GridPane;
@@ -166,7 +167,7 @@ public class MakeDesktop extends Application {
         
         Label l_name = new Label("Name");
         Label l_type = new Label("Type");
-        Label l_exec = new Label("Execute");
+        Label l_exec = new Label("Execute path");
         Label l_icon = new Label("Icon path");
         Label l_comment = new Label("Comment");
         Label l_catagories = new Label("Catagories");
@@ -176,11 +177,18 @@ public class MakeDesktop extends Application {
         //Displaying TextField
         final TextField t_name = new TextField();
         final TextField t_type = new TextField();
+        t_type.setText("Application");
         final TextField t_exec = new TextField();
-        final TextField t_icon = new TextField();
-        final TextField t_comment = new TextField();
-        final TextField t_catagories = new TextField();        
+        final Tooltip tooltip_exec = new Tooltip("Path to the executable program");
+        final Tooltip tooltip_icon = new Tooltip("Path to the icon[any image format]");
 
+        t_exec.setTooltip(tooltip_exec);
+        final TextField t_icon = new TextField();
+        t_icon.setTooltip(tooltip_icon);
+        final TextField t_comment = new TextField();
+        t_comment.setText("Some comment");
+        final TextField t_catagories = new TextField();        
+        t_catagories.setText("Application; Programming; ");
         //Radio Button
         final RadioButton r_term_true = new RadioButton("True");
         final RadioButton r_term_false = new RadioButton("False");
