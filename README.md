@@ -8,6 +8,8 @@ And type in 'java -jar MakeDesktop.jar'.
 
 This program requires Java JRE of minimum JDK 1.7.
 
+p/s : I am new to github, if there is some issue with the repos, please tell me. I'm still learning :)
+
 Regards,
 Xavier-IV
 
