@@ -1,16 +1,19 @@
-# MakeDesktop v1.0
+# Make-Desktop (MDesk)
+Copyright 2016 Make-Desktop (MDesk)
 
-This is my first submitted program online, I hope this program will help people simplify making their desktop file executable.
+Written by: Mohd Zafranudin(Xavier-IV)
 
-To run the program, go to the 'dist' folder, right-click, open the terminal here.
+Social: [Facebook](https://www.facebook.com/PuteraMujahidIslam)
 
-And type in 'java -jar MakeDesktop.jar'.
+Please read the LICENSE under Readme/LICENSE for the licensing of MDesk. 
 
-This program requires Java JRE of minimum JDK 1.7.
+#Features
+MDesk is an open-source program designed to simplify the task of making the .desktop file on Linux without hassle. This is a product from Mohd Zafranudin, from Malacca, Malaysia.
 
-p/s : I am new to github, if there is some issue with the repos, please tell me. I'm still learning :)
+### Bugs and enhancements
 
-Regards,
-Xavier-IV
+For bug reports or enhancements, please open an issue here: https://github.com/Xavier-IV/make-desktop/issues
 
+### Supported platforms
 
+* Linux
