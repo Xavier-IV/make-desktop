@@ -95,6 +95,8 @@ public class MakeDesktop extends Application {
     private Timeline animation;
     public String name,type,exec,icon,comment,catagories;
     public boolean terminal,no_display;
+    
+    
     private void init(Stage primaryStage) {
         Group root = new Group();
         primaryStage.setResizable(false);
