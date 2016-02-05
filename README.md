@@ -14,7 +14,7 @@ MDesk is an open-source program designed to simplify the task of making the .des
 
 This program require Java of minimum 1.7 to be installed on your system. Type:
 * $ java -version
-to check your current Java version.
+to check your current Java version
 
 #### How to use
 
