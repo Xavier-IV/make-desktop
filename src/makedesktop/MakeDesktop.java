@@ -71,6 +71,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -239,6 +240,10 @@ public class MakeDesktop extends Application {
         GridPane.setConstraints(r_nd_false, 1, 12);
 
         Button btn = new Button();
+        Button browse_1 = new Button("...");
+        Button browse_2 = new Button("...");
+
+        
         btn.setText("Make It");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
@@ -277,8 +282,78 @@ public class MakeDesktop extends Application {
             }
         });
         
+        browse_1.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                        FileChooser fileChooser = new FileChooser();
+
+                        //Extention filter
+                        FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+                        fileChooser.getExtensionFilters().add(extentionFilter);
+
+                        //Set to user directory or go to default if cannot access
+                        String userDirectoryString = System.getProperty("user.home");
+                        File userDirectory = new File(userDirectoryString);
+                        if(!userDirectory.canRead()) {
+                            userDirectory = new File("c:/");
+                        }
+                        fileChooser.setInitialDirectory(userDirectory);
+
+                        //Choose the file
+                        File chosenFile = fileChooser.showOpenDialog(null);
+                        //Make sure a file was selected, if not return default
+                        String path;
+                        if(chosenFile != null) {
+                            path = chosenFile.getPath();
+                            t_exec.setText(path);
+                        } else {
+                            //default return value
+                            path = null;
+                        }
+
+                            
+            }
+        });
+        
+        browse_2.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                        FileChooser fileChooser = new FileChooser();
+
+                        //Extention filter
+                        FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+                        fileChooser.getExtensionFilters().add(extentionFilter);
+
+                        //Set to user directory or go to default if cannot access
+                        String userDirectoryString = System.getProperty("user.home");
+                        File userDirectory = new File(userDirectoryString);
+                        if(!userDirectory.canRead()) {
+                            userDirectory = new File("c:/");
+                        }
+                        fileChooser.setInitialDirectory(userDirectory);
+
+                        //Choose the file
+                        File chosenFile = fileChooser.showOpenDialog(null);
+                        //Make sure a file was selected, if not return default
+                        String path;
+                        if(chosenFile != null) {
+                            path = chosenFile.getPath();
+                            t_icon.setText(path);
+                        } else {
+                            //default return value
+                            path = null;
+                        }
+
+                            
+            }
+        });
+        
         //Set position button
         GridPane.setConstraints(btn, 2, 14); 
+        GridPane.setConstraints(browse_1, 2, 4); 
+        GridPane.setConstraints(browse_2, 2, 5); 
 
 
         grid.getChildren().addAll( 
@@ -302,7 +377,9 @@ public class MakeDesktop extends Application {
                 r_term_false,
                 r_nd_true,
                 r_nd_false,
-                btn);
+                btn,
+                browse_1,
+                browse_2);
                 
         
         root.getChildren().addAll(group, grid);
