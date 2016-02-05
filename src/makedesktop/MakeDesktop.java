@@ -62,6 +62,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -87,16 +89,17 @@ import javafx.util.Duration;
  * @see javafx.animation.Timeline
  */
 public class MakeDesktop extends Application {
-    private static final double WIDTH = 495, HEIGHT = 480;
+    private static final double WIDTH = 500, HEIGHT = 500;
+    private final int MASTER_WIDTH=500, MASTER_HEIGHT=500;
+
     private Timeline animation;
     public String name,type,exec,icon,comment,catagories;
     public boolean terminal,no_display;
-    
     private void init(Stage primaryStage) {
         Group root = new Group();
         primaryStage.setResizable(false);
         primaryStage.setTitle("Make Desktop 1.0");
-        primaryStage.setScene(new Scene(root, 495,480));
+        primaryStage.setScene(new Scene(root, MASTER_WIDTH, MASTER_HEIGHT));
         Group layer1 = new Group();
         for(int i=0; i<15;i++) {
             Circle circle = new Circle(200,Color.web("white",0.05f));
@@ -316,6 +319,8 @@ public class MakeDesktop extends Application {
             }
         });
         
+        ImageView v1 = new ImageView();
+
         browse_2.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -341,6 +346,17 @@ public class MakeDesktop extends Application {
                         if(chosenFile != null) {
                             path = chosenFile.getPath();
                             t_icon.setText(path);
+                            
+                            Image img = new Image(new File(path).toURI().toString());
+
+                            v1.setImage(img);
+                            v1.setFitWidth(50);
+                            v1.setPreserveRatio(true);
+                            v1.setSmooth(true);
+                            v1.setCache(true);
+                            
+                            
+
                         } else {
                             //default return value
                             path = null;
@@ -349,12 +365,14 @@ public class MakeDesktop extends Application {
                             
             }
         });
+
+
         
         //Set position button
         GridPane.setConstraints(btn, 2, 14); 
         GridPane.setConstraints(browse_1, 2, 4); 
         GridPane.setConstraints(browse_2, 2, 5); 
-
+        GridPane.setConstraints(v1, 0, 15);
 
         grid.getChildren().addAll( 
                 title, 
@@ -379,7 +397,8 @@ public class MakeDesktop extends Application {
                 r_nd_false,
                 btn,
                 browse_1,
-                browse_2);
+                browse_2,
+                v1);
                 
         
         root.getChildren().addAll(group, grid);
