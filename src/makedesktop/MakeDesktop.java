@@ -37,45 +37,31 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import static java.lang.Math.random;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import makedesktop.design.design;
 
 /**
  * A sample that demonstrates how to draw and paint shapes, apply visual
@@ -89,87 +75,60 @@ import javafx.util.Duration;
  * @see javafx.animation.Timeline
  */
 public class MakeDesktop extends Application {
-    private static final double WIDTH = 500, HEIGHT = 500;
-    private final int MASTER_WIDTH=500, MASTER_HEIGHT=500;
 
-    private Timeline animation;
+    private static final double WIDTH = 530, HEIGHT = 600;
+    private final int MASTER_WIDTH=530, MASTER_HEIGHT=600;
+    private final String TITLE="Make-Desktop Version 1.3";
+    
     public String name,type,exec,icon,comment,catagories;
     public boolean terminal,no_display;
     
+<<<<<<< HEAD
     
+=======
+    public MakeDesktop(){
+        
+    }
+    
+    //create a console for logging mouse events
+    final ListView<String> console = new ListView<String>();
+    //create a observableArrayList of logged events that will be listed in console
+    final ObservableList<String> consoleObservableList = FXCollections.observableArrayList();
+    {
+        //set up the console
+        console.setItems(consoleObservableList);
+        console.setLayoutY(575);
+        console.setPrefSize(600, 27);
+    }
+    
+    private void showOnConsole(String text) {
+        //if there is 8 items in list, delete first log message, shift other logs and  add a new one to end position
+        if (consoleObservableList.size()==1) {
+           consoleObservableList.remove(0);
+        }
+        consoleObservableList.add(text);
+    }
+>>>>>>> add-new-feature
     private void init(Stage primaryStage) {
         Group root = new Group();
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Make Desktop 1.0");
-        primaryStage.setScene(new Scene(root, MASTER_WIDTH, MASTER_HEIGHT));
-        Group layer1 = new Group();
-        for(int i=0; i<15;i++) {
-            Circle circle = new Circle(200,Color.web("white",0.05f));
-            circle.setStrokeType(StrokeType.OUTSIDE);
-            circle.setStroke(Color.web("white",0.2f));
-            circle.setStrokeWidth(4f);
-            layer1.getChildren().add(circle);
-        }
-        // create second list of circles
-        Group layer2 = new Group();
-        for(int i=0; i<20;i++) {
-            Circle circle = new Circle(70,Color.web("white",0.05f));
-            circle.setStrokeType(StrokeType.OUTSIDE);
-            circle.setStroke(Color.web("white",0.1f));
-            circle.setStrokeWidth(2f);
-            layer2.getChildren().add(circle);
-        }
-        // create third list of circles
-        Group layer3 = new Group();
-        for(int i=0; i<10;i++) {
-            Circle circle = new Circle(150,Color.web("white",0.05f));
-            circle.setStrokeType(StrokeType.OUTSIDE);
-            circle.setStroke(Color.web("white",0.16f));
-            circle.setStrokeWidth(4f);
-            layer3.getChildren().add(circle);
-        }
-        // Set a blur effect on each layer
-        layer1.setEffect(new BoxBlur(30,30,3));
-        layer2.setEffect(new BoxBlur(2,2,2));
-        layer3.setEffect(new BoxBlur(10,10,3));
-        // create a rectangle size of window with colored gradient
-        Rectangle colors = new Rectangle(WIDTH, HEIGHT,
-                new LinearGradient(0f,1f,1f,0f,true, CycleMethod.NO_CYCLE, new Stop(0,Color.web("#f8bd55")),
-                        new Stop(0.14f,Color.web("#c0fe56")),
-                        new Stop(0.28f,Color.web("#5dfbc1")),
-                        new Stop(0.43f,Color.web("#64c2f8")),
-                        new Stop(0.57f,Color.web("#be4af7")),
-                        new Stop(0.71f,Color.web("#ed5fc2")),
-                        new Stop(0.85f,Color.web("#ef504c")),
-                        new Stop(1,Color.web("#f2660f")))
-        );
-        colors.setBlendMode(BlendMode.OVERLAY);
-        // create main content
-        Group group = new Group(
-                new Rectangle(WIDTH, HEIGHT, Color.BLACK),
-                layer1, 
-                layer2,
-                layer3,
-                colors
-        );
-        Rectangle clip = new Rectangle(WIDTH, HEIGHT);
-        clip.setSmooth(false);
-        group.setClip(clip);
-        
-        
+        primaryStage.setTitle(TITLE);
+
         GridPane grid = new GridPane();
 
         //Set Grid Gap/Padding
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setHgap(15);
+        grid.setVgap(15);
+        grid.setPadding(new Insets(15, 15, 15, 15));
         
         
         //Displaying text
-        Text title = new Text("Make-Desktop Version 1.0");
+        Text title = new Text(TITLE);
         Text author = new Text("author - zafran");
         title.setStyle("-fx-font: 15px TAHOMA; -fx-fill: white;");
         author.setStyle("-fx-font: 10px TAHOMA; -fx-fill: white;");
+        
+        
         
         Label l_name = new Label("Name");
         Label l_type = new Label("Type");
@@ -180,17 +139,40 @@ public class MakeDesktop extends Application {
         Label l_terminal = new Label("Terminal");
         Label l_no_display = new Label("No Display");
         
+        l_name.setTextFill(Color.WHITE);
+        l_type.setTextFill(Color.WHITE);
+        l_exec.setTextFill(Color.WHITE);
+        l_icon.setTextFill(Color.WHITE);
+        l_comment.setTextFill(Color.WHITE);
+        l_catagories.setTextFill(Color.WHITE);
+        l_terminal.setTextFill(Color.WHITE);
+        l_no_display.setTextFill(Color.WHITE);
+
         //Displaying TextField
         final TextField t_name = new TextField();
         final TextField t_type = new TextField();
         t_type.setText("Application");
         final TextField t_exec = new TextField();
-        final Tooltip tooltip_exec = new Tooltip("Path to the executable program");
-        final Tooltip tooltip_icon = new Tooltip("Path to the icon[any image format]");
-
-        t_exec.setTooltip(tooltip_exec);
+        t_exec.setOnMouseEntered((MouseEvent me) -> {
+            showOnConsole("Enter the path for the executable, can add value such as 'java -jar' at front.");
+        });
+        t_exec.setOnMouseExited((MouseEvent me) -> {
+           consoleObservableList.remove(0);
+        });
+        
         final TextField t_icon = new TextField();
-        t_icon.setTooltip(tooltip_icon);
+        t_icon.setOnMouseExited((MouseEvent me) -> {
+           consoleObservableList.remove(0);
+        });
+
+        t_icon.setOnMouseEntered((MouseEvent me) -> {
+            showOnConsole("Enter the path for the icon. Can be (.png), (.jpg)");
+        });
+        t_exec.setOnMouseExited((MouseEvent me) -> {
+           consoleObservableList.remove(0);
+        });
+        
+        
         final TextField t_comment = new TextField();
         t_comment.setText("Some comment");
         final TextField t_catagories = new TextField();        
@@ -250,121 +232,111 @@ public class MakeDesktop extends Application {
 
         
         btn.setText("Make It");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                        name = t_name.getText();
-                        type = t_type.getText();
-                        exec = t_exec.getText();
-                        icon = t_icon.getText();
-                        comment = t_comment.getText();
-                        catagories = t_catagories.getText();
-                                
-                        if(term.getSelectedToggle() == r_term_true)
-                            terminal = true;
-                        else if(term.getSelectedToggle() == r_term_false)
-                            terminal = true;
-                        
-                        if(n_disp.getSelectedToggle() == r_nd_true)
-                            no_display = true;
-                        else if(n_disp.getSelectedToggle() == r_nd_false)
-                            no_display = true;
-                        
-                        try {
-                            saveResult();
-                        } catch (IOException ex) {
-                            Logger.getLogger(MakeDesktop.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        MakeDesktop obj = new MakeDesktop();
+        btn.setOnAction((ActionEvent event) -> {
 
-                        String command = "chmod +x " + name + ".desktop";
+            if(t_name.getText().isEmpty() || t_exec.getText().isEmpty()){
+                showOnConsole("You must not leave name and execute empty!");
+            }
+            else{
+                name = t_name.getText();
+                type = t_type.getText();
+                exec = t_exec.getText();
+                icon = t_icon.getText();
+                comment = t_comment.getText();
+                catagories = t_catagories.getText();
 
-                        String output = obj.executeCommand(command);
+                if(term.getSelectedToggle() == r_term_true)
+                    terminal = true;
+                else if(term.getSelectedToggle() == r_term_false)
+                    terminal = true;
 
-                            
+                if(n_disp.getSelectedToggle() == r_nd_true)
+                    no_display = true;
+                else if(n_disp.getSelectedToggle() == r_nd_false)
+                    no_display = true;
+
+                try {
+                    saveResult();
+                } catch (IOException ex) {
+                    Logger.getLogger(MakeDesktop.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                MakeDesktop obj = new MakeDesktop();
+
+                String command = "chmod +x " + name + ".desktop";
+
+                String output = obj.executeCommand(command);
+                showOnConsole("Successfuly created "+name+" file!");
             }
         });
         
-        browse_1.setOnAction(new EventHandler<ActionEvent>() {
+        
+        browse_1.setOnAction((ActionEvent event) -> {
+            FileChooser fileChooser = new FileChooser();
             
-            @Override
-            public void handle(ActionEvent event) {
-                        FileChooser fileChooser = new FileChooser();
-
-                        //Extention filter
-                        FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
-                        fileChooser.getExtensionFilters().add(extentionFilter);
-
-                        //Set to user directory or go to default if cannot access
-                        String userDirectoryString = System.getProperty("user.home");
-                        File userDirectory = new File(userDirectoryString);
-                        if(!userDirectory.canRead()) {
-                            userDirectory = new File("c:/");
-                        }
-                        fileChooser.setInitialDirectory(userDirectory);
-
-                        //Choose the file
-                        File chosenFile = fileChooser.showOpenDialog(null);
-                        //Make sure a file was selected, if not return default
-                        String path;
-                        if(chosenFile != null) {
-                            path = chosenFile.getPath();
-                            t_exec.setText(path);
-                        } else {
-                            //default return value
-                            path = null;
-                        }
-
-                            
+            //Extention filter
+            FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+            fileChooser.getExtensionFilters().add(extentionFilter);
+            
+            //Set to user directory or go to default if cannot access
+            String userDirectoryString = System.getProperty("user.home");
+            File userDirectory = new File(userDirectoryString);
+            if(!userDirectory.canRead()) {
+                userDirectory = new File("c:/");
+            }
+            fileChooser.setInitialDirectory(userDirectory);
+            
+            //Choose the file
+            File chosenFile = fileChooser.showOpenDialog(null);
+            //Make sure a file was selected, if not return default
+            String path;
+            if(chosenFile != null) {
+                path = chosenFile.getPath();
+                t_exec.setText(path);
+            } else {
+                //default return value
+                path = null;
             }
         });
         
         ImageView v1 = new ImageView();
 
-        browse_2.setOnAction(new EventHandler<ActionEvent>() {
+        browse_2.setOnAction((ActionEvent event) -> {
+            FileChooser fileChooser = new FileChooser();
             
-            @Override
-            public void handle(ActionEvent event) {
-                        FileChooser fileChooser = new FileChooser();
-
-                        //Extention filter
-                        FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
-                        fileChooser.getExtensionFilters().add(extentionFilter);
-
-                        //Set to user directory or go to default if cannot access
-                        String userDirectoryString = System.getProperty("user.home");
-                        File userDirectory = new File(userDirectoryString);
-                        if(!userDirectory.canRead()) {
-                            userDirectory = new File("c:/");
-                        }
-                        fileChooser.setInitialDirectory(userDirectory);
-
-                        //Choose the file
-                        File chosenFile = fileChooser.showOpenDialog(null);
-                        //Make sure a file was selected, if not return default
-                        String path;
-                        if(chosenFile != null) {
-                            path = chosenFile.getPath();
-                            t_icon.setText(path);
-                            
-                            Image img = new Image(new File(path).toURI().toString());
-
-                            v1.setImage(img);
-                            v1.setFitWidth(50);
-                            v1.setPreserveRatio(true);
-                            v1.setSmooth(true);
-                            v1.setCache(true);
-                            
-                            
-
-                        } else {
-                            //default return value
-                            path = null;
-                        }
-
-                            
+            //Extention filter
+            FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+            fileChooser.getExtensionFilters().add(extentionFilter);
+            
+            //Set to user directory or go to default if cannot access
+            String userDirectoryString = System.getProperty("user.home");
+            File userDirectory = new File(userDirectoryString);
+            if(!userDirectory.canRead()) {
+                userDirectory = new File("c:/");
+            }
+            fileChooser.setInitialDirectory(userDirectory);
+            
+            //Choose the file
+            File chosenFile = fileChooser.showOpenDialog(null);
+            //Make sure a file was selected, if not return default
+            String path;
+            if(chosenFile != null) {
+                path = chosenFile.getPath();
+                t_icon.setText(path);
+                
+                Image img = new Image(new File(path).toURI().toString());
+                
+                v1.setImage(img);
+                v1.setFitWidth(50);
+                v1.setPreserveRatio(true);
+                v1.setSmooth(true);
+                v1.setCache(true);
+                
+                
+                
+            } else {
+                //default return value
+                path = null;
             }
         });
 
@@ -402,43 +374,22 @@ public class MakeDesktop extends Application {
                 browse_2,
                 v1);
                 
+        design obj = new design();
         
-        root.getChildren().addAll(group, grid);
-        // create list of all circles
-        List<Node> allCircles = new ArrayList<Node>();
-        allCircles.addAll(layer1.getChildren());
-        allCircles.addAll(layer2.getChildren());
-        allCircles.addAll(layer3.getChildren());
-        // Create a animation to randomly move every circle in allCircles
-        animation = new Timeline();
-        for(Node circle: allCircles) {
-            animation.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO, // set start position at 0s
-                    new KeyValue(circle.translateXProperty(),random()*WIDTH),
-                    new KeyValue(circle.translateYProperty(),random()*HEIGHT)
-                ),
-                new KeyFrame(new Duration(40000), // set end position at 40s
-                    new KeyValue(circle.translateXProperty(),random()*WIDTH),
-                    new KeyValue(circle.translateYProperty(),random()*HEIGHT)
-                )
-            );
-        }
-        animation.setAutoReverse(true);
-        animation.setCycleCount(Animation.INDEFINITE);
+        root.getChildren().addAll(obj.init_design(WIDTH, HEIGHT),grid, console);
+        obj.play();
+
+        primaryStage.setScene(new Scene(root, MASTER_WIDTH, MASTER_HEIGHT));
+
     }
 
-    @Override public void stop() {
-        animation.stop();
-    }
 
-    public void play() {
-        animation.play();
-    }
 
     @Override public void start(Stage primaryStage) throws Exception {
         init(primaryStage);
         primaryStage.show();
-        play();
+        
+        
     }
 
     /**
@@ -475,17 +426,7 @@ public class MakeDesktop extends Application {
             saveFile.write("Catagories="+catagories+"\n");
             saveFile.write("Name[en]="+name+"\n");
 
-            
-//            [Desktop Entry]
-//            Name=Eclipse 
-//            Type=Application
-//            Exec=env UBUNTU_MENUPROXY=0 eclipse44
-//            Terminal=false
-//            Icon=eclipse
-//            Comment=Integrated Development Environment
-//            NoDisplay=false
-//            Categories=Development;IDE;
-//            Name[en]=Eclipse
+           
 
         } catch (IOException e){
             e.printStackTrace();
